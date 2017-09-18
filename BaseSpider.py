@@ -4,6 +4,8 @@ from collections import Iterable
 from threading import local
 import requests
 
+from  logger import logger
+
 url_map  = local()
 url_map.urls = {}
 
@@ -40,7 +42,7 @@ class Request:
         return None
       response = requests.get(self.url, headers = self.headers, proxies=self.proxy)
       response.raise_for_status()
-      print("{}:{}".format(self.url, response.status_code))
+      logger.info("{}:{}".format(self.url, response.status_code))
     except:
       return None
     return response
